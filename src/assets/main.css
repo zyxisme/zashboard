@@ -5,3 +5,16 @@
 @import './styles/components.css';
 @import './styles/motion.css';
 @import './styles/tooltip.css';
+
+/* Fallback for h-dvh (100dvh) in browsers that don't support dvh unit (Chrome < 108) */
+@supports not (height: 100dvh) {
+  .h-dvh {
+    height: 100vh;
+  }
+  .min-h-dvh {
+    min-height: 100vh;
+  }
+  .max-h-dvh {
+    max-height: 100vh;
+  }
+}
