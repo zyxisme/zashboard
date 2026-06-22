@@ -5,5 +5,6 @@ export default {
     '@tailwindcss/postcss': {},
     '@csstools/postcss-oklab-function': { preserve: false },
     '@csstools/postcss-color-mix-function': { preserve: false },
+    'css-has-pseudo': { preserve: false },
   },
 }

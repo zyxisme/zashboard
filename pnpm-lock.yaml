@@ -155,6 +155,9 @@ importers:
       '@vue/tsconfig':
         specifier: ^0.9.1
         version: 0.9.1(typescript@6.0.3)(vue@3.5.38(typescript@6.0.3))
+      css-has-pseudo:
+        specifier: ^8.0.0
+        version: 8.0.0(postcss@8.5.15)
       daisyui:
         specifier: ^5.5.23
         version: 5.5.23
@@ -1234,6 +1237,15 @@ packages:
     engines: { node: '>=20.19.0' }
     peerDependencies:
       postcss: ^8.4
+
+  '@csstools/selector-specificity@6.0.0':
+    resolution:
+      {
+        integrity: sha512-4sSgl78OtOXEX/2d++8A83zHNTgwCJMaR24FvsYL7Uf/VS8HZk9PTwR51elTbGqMuwH3szLvvOXEaVnqn0Z3zA==,
+      }
+    engines: { node: '>=20.19.0' }
+    peerDependencies:
+      postcss-selector-parser: ^7.1.1
 
   '@csstools/utilities@3.0.0':
     resolution:
@@ -2902,6 +2914,15 @@ packages:
       {
         integrity: sha512-Fx7twabisBA+FQQ72VY/gzoSXL8RfzqKtldotbpeJjwFUYwUPBd5fm6ut/mK2T8JMPWph2CY1TpVIhy4I0ko+Q==,
       }
+
+  css-has-pseudo@8.0.0:
+    resolution:
+      {
+        integrity: sha512-Uz/bsHRbOeir/5Oeuz85tq/yLJLxX+3dpoRdjNTshs6jjqwUg8XaEZGDd0ci3fw7l53Srw0EkJ8mYan0eW5uGQ==,
+      }
+    engines: { node: '>=20.19.0' }
+    peerDependencies:
+      postcss: ^8.4
 
   css-unit-converter@1.1.2:
     resolution:
@@ -6550,6 +6571,10 @@ snapshots:
       postcss: 8.5.15
       postcss-value-parser: 4.2.0
 
+  '@csstools/selector-specificity@6.0.0(postcss-selector-parser@7.1.4)':
+    dependencies:
+      postcss-selector-parser: 7.1.4
+
   '@csstools/utilities@3.0.0(postcss@8.5.15)':
     dependencies:
       postcss: 8.5.15
@@ -7500,6 +7525,13 @@ snapshots:
     dependencies:
       color-convert: 0.5.3
       color-name: 1.1.4
+
+  css-has-pseudo@8.0.0(postcss@8.5.15):
+    dependencies:
+      '@csstools/selector-specificity': 6.0.0(postcss-selector-parser@7.1.4)
+      postcss: 8.5.15
+      postcss-selector-parser: 7.1.4
+      postcss-value-parser: 4.2.0
 
   css-unit-converter@1.1.2: {}
 

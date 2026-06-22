@@ -7,6 +7,10 @@ declare const __SINGBOX_NATIVE__: boolean
 declare const __FONT__: string
 
 declare module 'vue-virtual-scroller'
+declare module 'css-has-pseudo/browser' {
+  function cssHasPseudo(document: Document): void
+  export default cssHasPseudo
+}
 declare interface Navigator {
   standalone?: boolean
 }

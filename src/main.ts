@@ -1,4 +1,5 @@
 import '@/helper/dayjs'
+import cssHasPseudo from 'css-has-pseudo/browser'
 import 'tippy.js/animations/scale.css'
 import 'tippy.js/dist/tippy.css'
 import { createApp } from 'vue'
@@ -28,3 +29,6 @@ const app = createApp(App)
 app.use(router)
 app.use(i18n)
 app.mount('#app')
+
+// Initialize css-has-pseudo polyfill for :has() selector compatibility
+cssHasPseudo(document)
