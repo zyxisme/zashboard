@@ -1,3 +1,13 @@
+:root {
+  --signal-inactive: rgba(0, 0, 0, 0.2);
+}
+
+@supports (color: color-mix(in srgb, red, blue)) {
+  :root {
+    --signal-inactive: color-mix(in srgb, var(--bc) 20%, transparent);
+  }
+}
+
 div {
   @apply scrollbar-thin;
 }

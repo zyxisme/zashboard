@@ -11,7 +11,7 @@
       width="3"
       height="4"
       rx="0.5"
-      :fill="level >= 1 ? 'currentColor' : 'oklch(var(--bc) / 0.2)'"
+      :fill="level >= 1 ? 'currentColor' : 'var(--signal-inactive)'"
     />
     <rect
       x="5"
@@ -19,7 +19,7 @@
       width="3"
       height="8"
       rx="0.5"
-      :fill="level >= 2 ? 'currentColor' : 'oklch(var(--bc) / 0.2)'"
+      :fill="level >= 2 ? 'currentColor' : 'var(--signal-inactive)'"
     />
     <rect
       x="10"
@@ -27,7 +27,7 @@
       width="3"
       height="12"
       rx="0.5"
-      :fill="level >= 3 ? 'currentColor' : 'oklch(var(--bc) / 0.2)'"
+      :fill="level >= 3 ? 'currentColor' : 'var(--signal-inactive)'"
     />
   </svg>
 </template>
