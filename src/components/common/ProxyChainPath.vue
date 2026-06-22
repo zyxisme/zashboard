@@ -143,9 +143,17 @@ const handleSelect = (chain: string) => {
   min-width: max-content;
   align-items: center;
   border-radius: 9999px;
-  background-color: color-mix(in srgb, var(--color-base-content) 4%, transparent);
+  /* Chrome 99 fallback */
+  background-color: rgba(0, 0, 0, 0.04);
   padding: 2px;
   gap: 0;
+}
+
+/* Modern browsers */
+@supports (background-color: color-mix(in srgb, red, transparent)) {
+  .proxy-chain-path {
+    background-color: color-mix(in srgb, var(--color-base-content) 4%, transparent);
+  }
 }
 
 .proxy-chain-node {
@@ -160,7 +168,15 @@ const handleSelect = (chain: string) => {
 }
 
 .proxy-chain-node:hover {
-  background-color: color-mix(in srgb, var(--color-base-content) 8%, transparent);
+  /* Chrome 99 fallback */
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Modern browsers */
+@supports (background-color: color-mix(in srgb, red, transparent)) {
+  .proxy-chain-node:hover {
+    background-color: color-mix(in srgb, var(--color-base-content) 8%, transparent);
+  }
 }
 
 .proxy-chain-node-active {
