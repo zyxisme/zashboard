@@ -122,6 +122,12 @@ importers:
       '@bufbuild/protoc-gen-es':
         specifier: ^2.12.0
         version: 2.12.0(@bufbuild/protobuf@2.12.0)
+      '@csstools/postcss-color-mix-function':
+        specifier: ^4.0.5
+        version: 4.0.5(postcss@8.5.15)
+      '@csstools/postcss-oklab-function':
+        specifier: ^5.0.5
+        version: 5.0.5(postcss@8.5.15)
       '@tailwindcss/postcss':
         specifier: ^4.3.1
         version: 4.3.1
@@ -1158,6 +1164,85 @@ packages:
       }
     peerDependencies:
       '@bufbuild/protobuf': ^2.7.0
+
+  '@csstools/color-helpers@6.0.2':
+    resolution:
+      {
+        integrity: sha512-LMGQLS9EuADloEFkcTBR3BwV/CGHV7zyDxVRtVDTwdI2Ca4it0CCVTT9wCkxSgokjE5Ho41hEPgb8OEUwoXr6Q==,
+      }
+    engines: { node: '>=20.19.0' }
+
+  '@csstools/css-calc@3.2.1':
+    resolution:
+      {
+        integrity: sha512-DtdHlgXh5ZkA43cwBcAm+huzgJiwx3ZTWVjBs94kwz2xKqSimDA3lBgCjphYgwgVUMWatSM0pDd8TILB1yrVVg==,
+      }
+    engines: { node: '>=20.19.0' }
+    peerDependencies:
+      '@csstools/css-parser-algorithms': ^4.0.0
+      '@csstools/css-tokenizer': ^4.0.0
+
+  '@csstools/css-color-parser@4.1.8':
+    resolution:
+      {
+        integrity: sha512-3chWb7PRLijpJpPIKkDxdu6IBeO5MrFACND57On0j8OPpc0wZibcGc3xAHrSEbOx/KDRyMHoIxGn0w1PhXMYHw==,
+      }
+    engines: { node: '>=20.19.0' }
+    peerDependencies:
+      '@csstools/css-parser-algorithms': ^4.0.0
+      '@csstools/css-tokenizer': ^4.0.0
+
+  '@csstools/css-parser-algorithms@4.0.0':
+    resolution:
+      {
+        integrity: sha512-+B87qS7fIG3L5h3qwJ/IFbjoVoOe/bpOdh9hAjXbvx0o8ImEmUsGXN0inFOnk2ChCFgqkkGFQ+TpM5rbhkKe4w==,
+      }
+    engines: { node: '>=20.19.0' }
+    peerDependencies:
+      '@csstools/css-tokenizer': ^4.0.0
+
+  '@csstools/css-tokenizer@4.0.0':
+    resolution:
+      {
+        integrity: sha512-QxULHAm7cNu72w97JUNCBFODFaXpbDg+dP8b/oWFAZ2MTRppA3U00Y2L1HqaS4J6yBqxwa/Y3nMBaxVKbB/NsA==,
+      }
+    engines: { node: '>=20.19.0' }
+
+  '@csstools/postcss-color-mix-function@4.0.5':
+    resolution:
+      {
+        integrity: sha512-eBrrzTKudOlDl2XOJzW/pzHPIkC8tGkcGpNiFO/vmevb08U1huYEINhlxr8iz4OzSqs1GtiJx4d2v5iHFOZjNw==,
+      }
+    engines: { node: '>=20.19.0' }
+    peerDependencies:
+      postcss: ^8.4
+
+  '@csstools/postcss-oklab-function@5.0.5':
+    resolution:
+      {
+        integrity: sha512-A+Nkzj2ODvQboM5FlqEcp0iqilyVo78f9FMx/3cHrRrEBqCymSXvf8sa1cTY54lJoUVI3Sn9XysgvYaVIAuIYg==,
+      }
+    engines: { node: '>=20.19.0' }
+    peerDependencies:
+      postcss: ^8.4
+
+  '@csstools/postcss-progressive-custom-properties@5.1.0':
+    resolution:
+      {
+        integrity: sha512-lt/4yHy2GdKcGVpK4OGhBdSIq+z2PXynSusSRggn/T4y7uFurYAhdHqo/aYM+xI37vNb8rJlEKchqKKvVCXROQ==,
+      }
+    engines: { node: '>=20.19.0' }
+    peerDependencies:
+      postcss: ^8.4
+
+  '@csstools/utilities@3.0.0':
+    resolution:
+      {
+        integrity: sha512-etDqA/4jYvOGBM6yfKCOsEXfH96BKztZdgGmGqKi2xHnDe0ILIBraRspwgYatJH9JsCZ5HCGoCst8w18EKOAdg==,
+      }
+    engines: { node: '>=20.19.0' }
+    peerDependencies:
+      postcss: ^8.4
 
   '@esbuild/aix-ppc64@0.27.3':
     resolution:
@@ -4409,6 +4494,12 @@ packages:
         integrity: sha512-HllLaKKCBOdKudyzqrw/ve5rWouM9cDL+WHaSF9q4CkBEPjdTdiKNw1xF2dAz5rUKrxVmnUmOYxamwy37dnq2Q==,
       }
 
+  postcss-value-parser@4.2.0:
+    resolution:
+      {
+        integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==,
+      }
+
   postcss@5.2.18:
     resolution:
       {
@@ -6416,6 +6507,53 @@ snapshots:
     dependencies:
       '@bufbuild/protobuf': 2.12.0
 
+  '@csstools/color-helpers@6.0.2': {}
+
+  '@csstools/css-calc@3.2.1(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)':
+    dependencies:
+      '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
+      '@csstools/css-tokenizer': 4.0.0
+
+  '@csstools/css-color-parser@4.1.8(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)':
+    dependencies:
+      '@csstools/color-helpers': 6.0.2
+      '@csstools/css-calc': 3.2.1(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)
+      '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
+      '@csstools/css-tokenizer': 4.0.0
+
+  '@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0)':
+    dependencies:
+      '@csstools/css-tokenizer': 4.0.0
+
+  '@csstools/css-tokenizer@4.0.0': {}
+
+  '@csstools/postcss-color-mix-function@4.0.5(postcss@8.5.15)':
+    dependencies:
+      '@csstools/css-color-parser': 4.1.8(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)
+      '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
+      '@csstools/css-tokenizer': 4.0.0
+      '@csstools/postcss-progressive-custom-properties': 5.1.0(postcss@8.5.15)
+      '@csstools/utilities': 3.0.0(postcss@8.5.15)
+      postcss: 8.5.15
+
+  '@csstools/postcss-oklab-function@5.0.5(postcss@8.5.15)':
+    dependencies:
+      '@csstools/css-color-parser': 4.1.8(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)
+      '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
+      '@csstools/css-tokenizer': 4.0.0
+      '@csstools/postcss-progressive-custom-properties': 5.1.0(postcss@8.5.15)
+      '@csstools/utilities': 3.0.0(postcss@8.5.15)
+      postcss: 8.5.15
+
+  '@csstools/postcss-progressive-custom-properties@5.1.0(postcss@8.5.15)':
+    dependencies:
+      postcss: 8.5.15
+      postcss-value-parser: 4.2.0
+
+  '@csstools/utilities@3.0.0(postcss@8.5.15)':
+    dependencies:
+      postcss: 8.5.15
+
   '@esbuild/aix-ppc64@0.27.3':
     optional: true
 
@@ -8317,6 +8455,8 @@ snapshots:
   postcss-simple-vars@2.0.0:
     dependencies:
       postcss: 5.2.18
+
+  postcss-value-parser@4.2.0: {}
 
   postcss@5.2.18:
     dependencies:
