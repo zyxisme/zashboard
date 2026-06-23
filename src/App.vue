@@ -211,6 +211,28 @@ onMounted(async () => {
         --border: 1px;
         --depth: 0;
         --noise: 0;
+        --input-color: var(--color-base-content);
+      }
+      /* DaisyUI toggle fallback - uses :has() for checked state */
+      .toggle:checked,
+      .toggle[aria-checked=true] {
+        background-color: var(--color-base-100);
+        --input-color: var(--color-base-content);
+        grid-template-columns: 1fr 1fr 0fr;
+      }
+      .toggle:checked::before,
+      .toggle[aria-checked=true]::before {
+        background-color: currentColor;
+      }
+      .toggle:checked > :nth-child(2),
+      .toggle[aria-checked=true] > :nth-child(2) {
+        opacity: 0;
+        rotate: 15deg;
+      }
+      .toggle:checked > :nth-child(3),
+      .toggle[aria-checked=true] > :nth-child(3) {
+        opacity: 1;
+        rotate: 0deg;
       }
     `
     document.head.appendChild(style)
