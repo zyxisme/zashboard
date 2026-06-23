@@ -171,6 +171,51 @@ onMounted(async () => {
   window.visualViewport?.addEventListener('resize', updateAppHeight)
   window.addEventListener('resize', updateAppHeight)
 
+  // Detect if CSS :has() selector is supported (Chrome 105+).
+  // DaisyUI v5 generates selectors like:
+  //   :has(input.theme-controller[value=dark]:checked),[data-theme=dark]{...}
+  // On browsers without :has() support, the entire selector list is invalid,
+  // so no theme variables are applied. Inject a fallback style with simple
+  // [data-theme="dark"] selectors that old browsers can understand.
+  const supportsHas = CSS.supports('selector(:has(*))')
+  if (!supportsHas) {
+    const style = document.createElement('style')
+    style.textContent = `
+      body[data-theme="dark"] {
+        color-scheme: dark;
+        --color-base-100: #1d1d1f;
+        --color-base-200: #000;
+        --color-base-300: #424245;
+        --color-base-content: #f5f5f7;
+        --color-primary: #8583e9;
+        --color-primary-content: #fff;
+        --color-secondary: #2997ff;
+        --color-secondary-content: #fff;
+        --color-accent: #30d158;
+        --color-accent-content: #fff;
+        --color-neutral: #5e5e5e;
+        --color-neutral-content: #f5f5f7;
+        --color-info: #64d2ff;
+        --color-info-content: #fff;
+        --color-success: #30d158;
+        --color-success-content: #1c1c1e;
+        --color-warning: #ff9f0a;
+        --color-warning-content: #1c1c1e;
+        --color-error: #ff453a;
+        --color-error-content: #fff;
+        --radius-selector: .625rem;
+        --radius-field: .5rem;
+        --radius-box: .75rem;
+        --size-selector: .25rem;
+        --size-field: .25rem;
+        --border: 1px;
+        --depth: 0;
+        --noise: 0;
+      }
+    `
+    document.head.appendChild(style)
+  }
+
   if (autoImportSettings.value) {
     await importSettingsFromUrl()
   }
@@ -186,7 +231,10 @@ onMounted(async () => {
   watch(
     theme,
     () => {
-      document.body.setAttribute('data-theme', theme.value)
+      // On browsers without :has() support, force dark theme since the
+      // fallback style only defines dark theme variables.
+      const effectiveTheme = supportsHas ? theme.value : 'dark'
+      document.body.setAttribute('data-theme', effectiveTheme)
       setThemeColor()
     },
     {
