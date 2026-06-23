@@ -206,7 +206,7 @@ useKeyboard()
         `custom-background-${dashboardTransparent} custom-background bg-cover bg-center`,
       blurClass,
     ]"
-    :style="[backgroundImage, { height: 'var(--app-height, 100dvh)' }]"
+    :style="[backgroundImage, { height: 'var(--app-height, 100vh)' }]"
   >
     <RouterView />
     <div
