@@ -160,6 +160,17 @@ const autoSwitchToURLBackendIfExists = () => {
 autoSwitchToURLBackendIfExists()
 
 onMounted(async () => {
+  // Set --app-height CSS variable for browsers that don't support dvh units.
+  // This ensures the app always fills the viewport, even on old Chrome.
+  const updateAppHeight = () => {
+    const viewport = window.visualViewport
+    const height = viewport ? viewport.height : window.innerHeight
+    document.documentElement.style.setProperty('--app-height', `${Math.round(height)}px`)
+  }
+  updateAppHeight()
+  window.visualViewport?.addEventListener('resize', updateAppHeight)
+  window.addEventListener('resize', updateAppHeight)
+
   if (autoImportSettings.value) {
     await importSettingsFromUrl()
   }
@@ -206,7 +217,7 @@ useKeyboard()
         `custom-background-${dashboardTransparent} custom-background bg-cover bg-center`,
       blurClass,
     ]"
-    :style="[backgroundImage, { height: 'var(--app-height, 100dvh)' }]"
+    :style="[backgroundImage, { height: 'var(--app-height, 100vh)' }]"
   >
     <RouterView />
     <div
