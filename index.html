@@ -39,49 +39,54 @@
   <body class="h-dvh w-screen">
     <div id="app"></div>
     <div
-      id="error-display"
+      id="debug-banner"
       style="
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        background: red;
+        background: #00cc00;
         color: white;
-        padding: 10px;
+        padding: 8px 10px;
         z-index: 999999;
-        font-size: 12px;
-        display: none;
+        font-size: 11px;
+        font-family: monospace;
         white-space: pre-wrap;
         word-break: break-all;
       "
-    ></div>
+    >
+      ZASHBOARD DEBUG: HTML loaded, inline JS running...
+    </div>
     <script>
       ;(function () {
-        var ed = document.getElementById('error-display')
+        var db = document.getElementById('debug-banner')
+        db.textContent += '\nInline script executed OK.'
         window.onerror = function (msg, src, line, col, err) {
-          ed.style.display = 'block'
-          ed.textContent += 'ERROR: ' + msg + ' (' + src + ':' + line + ':' + col + ')\n'
+          db.style.background = 'red'
+          db.textContent += '\nJS ERROR: ' + msg + ' (' + src + ':' + line + ')'
         }
         window.addEventListener('unhandledrejection', function (e) {
-          ed.style.display = 'block'
-          ed.textContent +=
-            'PROMISE REJECTION: ' + (e.reason ? e.reason.message || e.reason : e) + '\n'
+          db.style.background = 'red'
+          db.textContent += '\nPROMISE REJECT: ' + (e.reason ? e.reason.message || e.reason : e)
         })
         window.addEventListener(
           'error',
           function (e) {
             if (e.target && (e.target.tagName === 'LINK' || e.target.tagName === 'SCRIPT')) {
-              ed.style.display = 'block'
-              ed.textContent += 'RESOURCE ERROR: ' + (e.target.href || e.target.src) + '\n'
+              db.style.background = 'red'
+              db.textContent += '\nRESOURCE FAIL: ' + (e.target.href || e.target.src)
             }
           },
           true,
         )
         setTimeout(function () {
           var app = document.getElementById('app')
-          if (app && app.children.length === 0) {
-            ed.style.display = 'block'
-            ed.textContent += 'TIMEOUT: Vue app did not mount after 5s. #app is empty.\n'
+          db.textContent += '\n5s check: #app has ' + app.children.length + ' children.'
+          if (app.children.length === 0) {
+            db.style.background = 'red'
+            db.textContent += ' Vue did NOT mount!'
+          } else {
+            db.textContent += ' Vue mounted OK.'
           }
         }, 5000)
       })()
