@@ -59,35 +59,84 @@
     </div>
     <script>
       ;(function () {
-        var db = document.getElementById('debug-banner')
-        db.textContent += '\nInline script executed OK.'
+        var step = 0
+        function log(msg) {
+          step++
+          var db = document.getElementById('debug-banner')
+          if (!db) {
+            db = document.createElement('div')
+            db.id = 'debug-banner'
+            db.style.cssText =
+              'position:fixed;top:0;left:0;right:0;background:red;color:white;padding:8px 10px;z-index:999999;font-size:11px;font-family:monospace;white-space:pre-wrap;word-break:break-all;'
+            document.body.prepend(db)
+          }
+          db.textContent += '\n[' + step + '] ' + msg
+        }
+        log('Inline JS running...')
+
+        // Protect banner from removal
+        var observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (m) {
+            m.removedNodes.forEach(function (n) {
+              if (
+                n.id === 'debug-banner' ||
+                (n.contains && n.contains(document.getElementById('debug-banner')))
+              ) {
+                document.body.prepend(n)
+                log('Banner removed! Re-added.')
+              }
+            })
+          })
+        })
+        observer.observe(document.body, { childList: true })
+
         window.onerror = function (msg, src, line, col, err) {
-          db.style.background = 'red'
-          db.textContent += '\nJS ERROR: ' + msg + ' (' + src + ':' + line + ')'
+          log('ERROR: ' + msg + ' (' + src + ':' + line + ')')
+          var db = document.getElementById('debug-banner')
+          if (db) db.style.background = 'red'
         }
         window.addEventListener('unhandledrejection', function (e) {
-          db.style.background = 'red'
-          db.textContent += '\nPROMISE REJECT: ' + (e.reason ? e.reason.message || e.reason : e)
+          log('PROMISE: ' + (e.reason ? e.reason.message || e.reason : e))
+          var db = document.getElementById('debug-banner')
+          if (db) db.style.background = 'red'
         })
-        window.addEventListener(
-          'error',
-          function (e) {
-            if (e.target && (e.target.tagName === 'LINK' || e.target.tagName === 'SCRIPT')) {
-              db.style.background = 'red'
-              db.textContent += '\nRESOURCE FAIL: ' + (e.target.href || e.target.src)
-            }
-          },
-          true,
-        )
+
+        log('Handlers set. Module script next...')
+
+        setTimeout(function () {
+          log(
+            '1s: body=' +
+              document.body.children.length +
+              ', app=' +
+              document.getElementById('app').children.length,
+          )
+        }, 1000)
+        setTimeout(function () {
+          log(
+            '3s: body=' +
+              document.body.children.length +
+              ', app=' +
+              document.getElementById('app').children.length,
+          )
+          var banner = document.getElementById('debug-banner')
+          if (banner) {
+            log(
+              '3s: banner in DOM=' +
+                true +
+                ', display=' +
+                getComputedStyle(banner).display +
+                ', vis=' +
+                getComputedStyle(banner).visibility,
+            )
+          } else {
+            log('3s: banner NOT in DOM!')
+          }
+        }, 3000)
         setTimeout(function () {
           var app = document.getElementById('app')
-          db.textContent += '\n5s check: #app has ' + app.children.length + ' children.'
-          if (app.children.length === 0) {
-            db.style.background = 'red'
-            db.textContent += ' Vue did NOT mount!'
-          } else {
-            db.textContent += ' Vue mounted OK.'
-          }
+          log('5s: #app children=' + app.children.length)
+          if (app.children.length === 0) log('Vue did NOT mount!')
+          else log('Vue mounted OK.')
         }, 5000)
       })()
     </script>
